@@ -5,7 +5,7 @@ export const updateUser = async (req,res) => {
     const {id} = req.params
     const {_id, isAdmin} = req.user
 
-    if(id.toString() !== _id.toString() || !isAdmin){
+    if(id.toString() !== _id.toString() && !isAdmin){
         return res.status(400).json({message: "You are not authorized to carry out this action"})
     }
     try{
