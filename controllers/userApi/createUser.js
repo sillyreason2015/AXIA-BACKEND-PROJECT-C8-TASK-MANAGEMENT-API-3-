@@ -1,6 +1,6 @@
 import User from "../../schema/userSchema.js";
 import bcrypt, { genSalt } from 'bcrypt'
-import { sendMail } from "../../utils/sendmail.js";
+import { sendMail } from "../../utils/sendMail.js";
 
 
 
