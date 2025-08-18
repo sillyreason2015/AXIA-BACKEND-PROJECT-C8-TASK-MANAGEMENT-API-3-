@@ -9,7 +9,7 @@ export const logoutUser = async (req, res) => {
             secure: false,
             path: '/'
         })
-        await User.findByIdAndUpdate(req.user._id, { isActive: false })
+        await User.findByIdAndUpdate(req.user._id)
         return res.status(200).json({message: "Logout successful"})
     }catch(error){
         res.status(500).json({message: error.message})

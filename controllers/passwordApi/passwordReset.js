@@ -1,5 +1,5 @@
 import User from "../../schema/userSchema.js"
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 
 
 export const resetPassword = async (req, res) => {

@@ -1,5 +1,5 @@
 import User from '../../schema/userSchema.js'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import genToken from '../../jwt/genToken.js'
 import { sendMail } from '../../utils/sendMail.js'
 
@@ -33,7 +33,6 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({message: "Invalid login credentials"})
         }
        
-        user.isActive = true;
         await user.save();
 
         await sendMail(mail)
