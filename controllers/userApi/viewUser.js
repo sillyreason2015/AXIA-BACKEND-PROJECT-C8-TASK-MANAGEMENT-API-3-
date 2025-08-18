@@ -12,7 +12,6 @@ export const viewUser = async (req, res) => {
         if(!user){
             return res.status(400).json({message: "This user does not exist.Please register to continue"})
         }
-        
         res.status(200).json(user)
     }catch(error){
         res.status(500).json({message: error.message})
