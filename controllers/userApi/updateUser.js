@@ -10,8 +10,7 @@ export const updateUser = async (req,res) => {
     }
     try{
         const update = {
-            ...req.body,
-            password:hashPassword
+            ...req.body
         }
 
         if(update.password){

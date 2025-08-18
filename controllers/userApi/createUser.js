@@ -1,5 +1,5 @@
 import User from "../../schema/userSchema.js";
-import bcrypt, { genSalt } from 'bcrypt'
+import bcrypt from 'bcrypt'
 import { sendMail } from "../../utils/sendMail.js";
 
 
@@ -19,7 +19,7 @@ export const createUser = async (req, res) => {
     const otpExpires = new Date(Date.now() + 1000 * 60 * 5).toISOString()
 
     const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(salt, password)
+    const hashedPassword = await bcrypt.hash(password, salt)
 
 
     const newUser = new User({
@@ -30,12 +30,13 @@ export const createUser = async (req, res) => {
     }) 
 
     await newUser.save()
+    res.status(200).json({message: "New User created Successfully"})
 
     const mailObj = {
             mailFrom: process.env.EMAIL_USER,
             mailTo: email,
             subject: "New User Registration Successful",
-            body: `Hi ${displayName}. Thank you for registering with us. Your verification code is ${otp} and it expires in 5 minutes`
+            body: `Hi ${username}. Thank you for registering with us. Your verification code is ${otp} and it expires in 5 minutes`
         }
 
         await sendMail(mailObj)

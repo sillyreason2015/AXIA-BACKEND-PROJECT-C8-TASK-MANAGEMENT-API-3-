@@ -9,6 +9,10 @@ export const viewUser = async (req, res) => {
     }
     try{
         const user = await User.findById(id).select("-lastOtpSentAt -password -_id -updatedAt -createdAt -__v -isPrivate -isAdmin -isVerified ")
+        if(!user){
+            return res.status(400).json({message: "This user does not exist.Please register to continue"})
+        }
+        
         res.status(200).json(user)
     }catch(error){
         res.status(500).json({message: error.message})

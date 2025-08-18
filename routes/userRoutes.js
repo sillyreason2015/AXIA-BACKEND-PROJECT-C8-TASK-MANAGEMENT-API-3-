@@ -11,10 +11,10 @@ const userRouter = router()
 
 userRouter
 .post('/create', createUser)
-.get('/user', authMiddleware, viewUser)
 .get('/users', authMiddleware, viewUsers)
-.put('/update', authMiddleware, updateUser)
-.delete('/delete', authMiddleware, deleteUser)
+.get('/user/:id', authMiddleware, viewUser)
+.put('/update/:id', authMiddleware, updateUser)
+.delete('/delete/:id', authMiddleware, deleteUser)
 
 
 export default userRouter
