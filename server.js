@@ -7,7 +7,7 @@ import userRouter from './routes/userRoutes.js'
 import passwordRouter from './routes/passwordRoutes.js'
 import otpRouter from './routes/otpRoutes.js'
 import authRouter from './routes/authRoutes.js'
-
+import taskRouter from './routes/taskRoutes.js'
 
 
 const app = express()
@@ -28,6 +28,7 @@ app.use('/api', userRouter)
 app.use('/api/password', passwordRouter)
 app.use('/api/otp', otpRouter)
 app.use('/api', authRouter)
+app.use('/api/task', taskRouter)
 
 
 
