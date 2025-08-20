@@ -12,10 +12,10 @@ const taskRouter = router()
 
 taskRouter
 .post('/create', authMiddleware, createTask)
-.get('/:id',authMiddleware, viewTask )
 .get('/all', authMiddleware, viewAllTasks)
-.get('/:category', authMiddleware, viewTaskByCategory)
-.put('/update', authMiddleware, updateTask)
-.delete('/delete', authMiddleware, deleteTask)
+.get('/:id',authMiddleware, viewTask )
+.get('/category/:category', authMiddleware, viewTaskByCategory)
+.put('/update/:id', authMiddleware, updateTask)
+.delete('/delete/:id', authMiddleware, deleteTask)
 
 export default taskRouter
