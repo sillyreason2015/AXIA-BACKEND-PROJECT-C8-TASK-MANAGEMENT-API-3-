@@ -1,4 +1,4 @@
-import User from "../schema/userSchema.js"
+import User from "../../schema/userSchema.js"
 
 export const viewUsers = async (req, res) => {
     if (req.user.isAdmin !== true) {
@@ -7,7 +7,7 @@ export const viewUsers = async (req, res) => {
 
     try {
         const users = await User.find().select(
-            '-_id -password -isPrivate -isVerified -createdAt -updatedAt -__v -lastOtpSentAt -isAdmin'
+            '-_id -password -isPrivate -isVerified -createdAt -updatedAt -__v -lastOtpSentAt -isAdmin -otp -otpExpires'
         )
 
         if (!users || users.length === 0) {
@@ -29,7 +29,7 @@ export const viewUser = async (req, res) => {
 
     try {
         const user = await User.findById(id).select(
-            "-lastOtpSentAt -password -_id -updatedAt -createdAt -__v -isPrivate -isAdmin -isVerified"
+            "-lastOtpSentAt -password -_id -updatedAt -createdAt -__v -isAdmin -isVerified"
         )
 
         if (!user) {

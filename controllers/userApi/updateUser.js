@@ -1,5 +1,5 @@
 import User from "../../schema/userSchema.js"
-
+import bcrypt from 'bcrypt'
 
 export const updateUser = async (req,res) => {
     const {id} = req.params
@@ -15,7 +15,7 @@ export const updateUser = async (req,res) => {
 
         if(update.password){
             const salt = await bcrypt.genSalt(10)
-            update.password = await bcrypt.hash(salt, update.password)
+            update.password = await bcrypt.hash(update.password, salt)
         }
 
         const user = await User.findByIdAndUpdate(
