@@ -1,20 +1,27 @@
 import router from 'express'
+import authMiddleware from '../middleware/authMiddleware.js' // Import authentication middleware
 
-import {createUser} from '../controllers/userApi/userBarrel.js'
+// Import user controllers
+import { createUser } from '../controllers/userApi/userBarrel.js'
 import { viewUser, viewUsers } from '../controllers/userApi/userBarrel.js'
-import { deleteUser } from '../controllers/userApi/userBarrel.js'
 import { updateUser } from '../controllers/userApi/userBarrel.js'
-import authMiddleware from '../middleware/authMiddleware.js'
+import { deleteUser } from '../controllers/userApi/userBarrel.js'
 
-const userRouter = router()
+const userRouter = router() // Create a new router instance
 
+// Route to register/create a new user (public)
+userRouter.post('/create', createUser)
 
-userRouter
-.post('/create', createUser)
-.get('/users', authMiddleware, viewUsers)
-.get('/user/:id', authMiddleware, viewUser)
-.put('/update/:id', authMiddleware, updateUser)
-.delete('/delete/:id', authMiddleware, deleteUser)
+// Route to view all users 
+userRouter.get('/users', authMiddleware, viewUsers)
 
+// Route to view a specific user by ID 
+userRouter.get('/user/:id', authMiddleware, viewUser)
 
-export default userRouter
+// Route to update a specific user by ID 
+userRouter.put('/update/:id', authMiddleware, updateUser)
+
+// Route to delete a specific user by ID 
+userRouter.delete('/delete/:id', authMiddleware, deleteUser)
+
+export default userRouter 

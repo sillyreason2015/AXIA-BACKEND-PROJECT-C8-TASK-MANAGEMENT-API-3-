@@ -1,17 +1,14 @@
 import router from 'express'
+import { requestPassword } from '../controllers/passwordApi/passwordBarrel.js' // Controller to request password reset
+import { resetPassword } from '../controllers/passwordApi/passwordBarrel.js' // Controller to reset password
+import authMiddleware from '../middleware/authMiddleware.js' // Middleware to verify user authentication
 
-import { requestPassword } from '../controllers/passwordApi/passwordBarrel.js'
-import { resetPassword } from '../controllers/passwordApi/passwordBarrel.js'
-import authMiddleware from '../middleware/authMiddleware.js'
+const passwordRouter = router() // Create a new router instance
 
+// Route for requesting a password reset 
+passwordRouter.post('/request', authMiddleware, requestPassword)
 
-const passwordRouter = router()
+// Route for resetting the password 
+passwordRouter.post('/reset', authMiddleware, resetPassword)
 
-
-passwordRouter
-.post('/request', authMiddleware, requestPassword)
-.post('/reset', authMiddleware, resetPassword)
-
-
-export default passwordRouter
-
+export default passwordRouter 

@@ -1,14 +1,14 @@
-import router from 'express'
+import router from 'express' 
+import { loginUser } from '../controllers/authApi/authBarrel.js' // Controller for login
+import { logoutUser } from '../controllers/authApi/authBarrel.js' // Controller for logout
+import authMiddleware from '../middleware/authMiddleware.js' // Middleware to protect routes
 
-import { loginUser } from '../controllers/authApi/authBarrel.js'
-import { logoutUser } from '../controllers/authApi/authBarrel.js'
-import authMiddleware from '../middleware/authMiddleware.js'
+const authRouter = router() // Create a new router instance
 
+// Route for user login 
+authRouter.post('/login', loginUser) 
 
-const authRouter = router()
+// Route for user logout 
+authRouter.post('/logout', authMiddleware, logoutUser) 
 
-authRouter
-.post('/login',loginUser)
-.post('/logout',authMiddleware,logoutUser)
-
-export default authRouter
+export default authRouter 

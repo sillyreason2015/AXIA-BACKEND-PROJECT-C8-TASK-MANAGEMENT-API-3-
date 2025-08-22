@@ -1,9 +1,16 @@
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-dotenv.config()
+import jwt from 'jsonwebtoken' 
+import dotenv from 'dotenv'     
 
-const genToken = (payload)=>{
-    return jwt.sign(payload, process.env.ACCESS_TOKEN, {expiresIn: "3h"})
+dotenv.config() // Load environment variables from .env file
+
+// Function to generate a JWT token with a given payload
+const genToken = (payload) => {
+    // jwt.sign(payload, secret, options)
+    return jwt.sign(
+        payload,    
+        process.env.ACCESS_TOKEN,  
+        { expiresIn: "3h" }       
+    )
 }
 
-export default genToken
+export default genToken 
